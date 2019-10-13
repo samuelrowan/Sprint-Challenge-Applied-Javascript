@@ -21,7 +21,13 @@ const cardsContainer = document.querySelector('.cards-container');
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
   .then( res => {
     console.log(res.data.articles);
-    Object.keys(res.data.articles).forEach( arr => {cardCreator(arr)})
+    //I don't understand why this doesn't work!?!?!?!?!
+    // Object.keys(res.data.articles).forEach( arr => {cardCreator(arr)})
+    cardCreator(res.data.articles.bootstrap);
+    cardCreator(res.data.articles.javascript);
+    cardCreator(res.data.articles.jquery);
+    cardCreator(res.data.articles.node);
+    cardCreator(res.data.articles.technology);
   })
   .catch( err => {
     console.log(err);
