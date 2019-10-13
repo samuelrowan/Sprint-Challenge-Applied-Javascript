@@ -51,7 +51,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
 //   return cardsContainer;
 // }
 function cardCreator(arr){
-  for (i = 0; i < arr.length-1; i++){
+  for (i = 0; i < arr.length; i++){
     const cardDiv = document.createElement('div');
     const headlineDiv = document.createElement('div');
     const authorDiv = document.createElement('div');
@@ -64,7 +64,7 @@ function cardCreator(arr){
     authorDiv.classList.add('author');
     authorImgDiv.classList.add('img-container');
 
-    authorImg.src = arr.authorPhoto;
+    authorImg.src = arr[i].authorPhoto;
 
     cardsContainer.appendChild(authorImg)
     }
