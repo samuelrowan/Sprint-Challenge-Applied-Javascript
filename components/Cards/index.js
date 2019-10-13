@@ -21,52 +21,38 @@ const cardsContainer = document.querySelector('.cards-container');
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
   .then( res => {
     console.log(res.data.articles);
-    cardCreator(res.data.articles.bootstrap);
+    cardCreator(res.data.articles);
   })
   .catch( err => {
     console.log(err);
   })
 
+function cardCreator(obj){
+  Object.keys(obj).forEach( arr => {
+    for (i = 0; i < arr.length; i++){
+      const cardDiv = document.createElement('div');
+      const headlineDiv = document.createElement('div');
+      const authorDiv = document.createElement('div');
+      const authorImgDiv = document.createElement('div');
+      const authorImg = document.createElement('img');
+      const authorSpan = document.createElement('span');
 
-// function cardCreator(obj){
-//   Object.keys(obj).forEach( topic => {
-//     for (i = 0; i < topic.length-1; i++){
-//       const cardDiv = document.createElement('div');
-//       const headlineDiv = document.createElement('div');
-//       const authorDiv = document.createElement('div');
-//       const authorImgDiv = document.createElement('div');
-//       const authorImg = document.createElement('img');
-//       const authorSpan = document.createElement('span');
-//
-//       cardDiv.classList.add('card');
-//       headlineDiv.classList.add('headline');
-//       authorDiv.classList.add('author');
-//       authorImgDiv.classList.add('img-container');
-//
-//       authorImg.src = obj.topic[i].authorPhoto;
-//
-//       cardsContainer.appendChild(authorImg)
-//     }
-//   })
-//   return cardsContainer;
-// }
-function cardCreator(arr){
-  for (i = 0; i < arr.length; i++){
-    const cardDiv = document.createElement('div');
-    const headlineDiv = document.createElement('div');
-    const authorDiv = document.createElement('div');
-    const authorImgDiv = document.createElement('div');
-    const authorImg = document.createElement('img');
-    const authorSpan = document.createElement('span');
+      cardDiv.classList.add('card');
+      headlineDiv.classList.add('headline');
+      authorDiv.classList.add('author');
+      authorImgDiv.classList.add('img-container');
 
-    cardDiv.classList.add('card');
-    headlineDiv.classList.add('headline');
-    authorDiv.classList.add('author');
-    authorImgDiv.classList.add('img-container');
+      headlineDiv.textContent = arr[i].headline;
+      authorImg.src = arr[i].authorPhoto;
+      authorSpan.textContent = `By ${arr[i].authorName}`
 
-    authorImg.src = arr[i].authorPhoto;
-
-    cardsContainer.appendChild(authorImg)
-    }
+      authorImgDiv.appendChild(authorImg);
+      authorDiv.appendChild(authorImgDiv);
+      authorDiv.appendChild(authorSpan);
+      cardDiv.appendChild(headlineDiv);
+      cardDiv.appendChild(authorDiv);
+      cardsContainer.appendChild(cardDiv);
+      }
+    })
   return cardsContainer;
 }
