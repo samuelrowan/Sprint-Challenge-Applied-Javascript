@@ -21,14 +21,13 @@ const cardsContainer = document.querySelector('.cards-container');
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
   .then( res => {
     console.log(res.data.articles);
-    cardCreator(res.data.articles);
+    Object.keys(res.data.articles).forEach( arr => {cardCreator(arr)})
   })
   .catch( err => {
     console.log(err);
   })
 
-function cardCreator(obj){
-  Object.keys(obj).forEach( arr => {
+function cardCreator(arr){
     for (i = 0; i < arr.length; i++){
       const cardDiv = document.createElement('div');
       const headlineDiv = document.createElement('div');
@@ -53,6 +52,5 @@ function cardCreator(obj){
       cardDiv.appendChild(authorDiv);
       cardsContainer.appendChild(cardDiv);
       }
-    })
   return cardsContainer;
 }
